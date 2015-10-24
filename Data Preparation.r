@@ -36,21 +36,21 @@ for(i in 1:length(qd)){
 nd$dd.num[is.na(nd$dd.num)]                     <- 0
 nd$dd.outof[is.na(nd$dd.outof)]                 <- 0
 nd$dd.points[is.na(nd$dd.points)]               <- 0
-#nd$dd.shot_distance[is.na(nd$dd.shot_distance)] <- 0
+nd$dd.shot_distance[is.na(nd$dd.shot_distance)] <- 0
 
-shots <- nd$dd.shot_distance
-shots[is.na(shots)] <- 0
+#shots <- nd$dd.shot_distance
+#shots[is.na(shots)] <- 0
 
 nNA <- length(nd$dd.converted_x[is.na(nd$dd.converted_x) & qd$dd.event_type !="free throw"]) 
 #nNAS <- length(nd$dd.shot_distance[is.na(nd$dd.shot_distance) & qd$dd.event_type !="free throw"]) 
 
 randomX <- sample(0:50, nNA, replace = TRUE)
 randomY <- sample(0:94, nNA, replace = TRUE)
-randomS <- sample(min(shots):max(shots), nNA, replace = TRUE)
+#randomS <- sample(min(shots):max(shots), nNA, replace = TRUE)
 
 nd$dd.converted_x[is.na(nd$dd.converted_x) & qd$dd.event_type !="free throw"] <- randomX
 nd$dd.converted_y[is.na(nd$dd.converted_y) & qd$dd.event_type !="free throw"] <- randomY
-nd$dd.shot_distance[is.na(nd$dd.shot_distance) & qd$dd.event_type !="free throw"] <- randomS
+#nd$dd.shot_distance[is.na(nd$dd.shot_distance) & qd$dd.event_type !="free throw"] <- randomS
 
 nd$dd.shot_distance[qd$dd.event_type =="free throw"]<-19
 #shot_distance feet to m 
@@ -90,4 +90,3 @@ cds$converted_x <- nd$dd.converted_x
 cds$converted_y <- nd$dd.converted_y
 
 write.csv(cds, file="NBA.csv")
-
